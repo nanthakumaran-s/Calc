@@ -4,7 +4,7 @@ import React from "react";
 const RButton = ({ action, value, colorScheme, vis = "block" }) => {
   return (
     <Button
-      onClick={action}
+      onClick={() => action(value)}
       width="16"
       height="16"
       borderRadius="full"

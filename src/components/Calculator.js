@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Flex, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import RButton from "./RButton";
 
 export default function Calculator() {
@@ -7,39 +7,38 @@ export default function Calculator() {
   const [oldNum, setOldNum] = useState(0);
   const [operator, setOperator] = useState();
 
-  function inputNum(e) {
-    let input = e.target.value;
+  const inputNum = (e) => {
+    console.log(e);
     if (num === 0) {
-      setNum(input);
+      setNum(e);
     } else {
-      setNum(num + input);
+      setNum(num + e);
     }
-  }
+  };
 
-  function clear() {
+  const clear = () => {
     setNum(0);
-  }
+  };
 
-  function porcentagem(e) {
+  const percentage = () => {
     setNum(num / 100);
-  }
+  };
 
-  function changeSign() {
+  const changeSign = () => {
     if (num > 0) {
       setNum(-num);
     } else {
       setNum(Math.abs(num));
     }
-  }
+  };
 
-  function operatorHandler(e) {
-    let operatorInput = e.target.value;
-    setOperator(operatorInput);
+  const operatorHandler = (e) => {
+    setOperator(e);
     setOldNum(num);
     setNum(0);
-  }
+  };
 
-  function calculate() {
+  const calculate = () => {
     if (operator === "/") {
       setNum(parseFloat(oldNum) / parseFloat(num));
     } else if (operator === "X") {
@@ -49,7 +48,7 @@ export default function Calculator() {
     } else if (operator === "+") {
       setNum(parseFloat(oldNum) + parseFloat(num));
     }
-  }
+  };
 
   return (
     <Flex
@@ -68,7 +67,7 @@ export default function Calculator() {
         my="10"
         gap="3"
       >
-        <Flex justifyContent="end" width="100%" pr="7">
+        <Flex justifyContent="end" width="100%" pr="4">
           <Text color="white" fontSize="6xl">
             {num.toString().slice(0, 6)}
           </Text>
@@ -80,11 +79,7 @@ export default function Calculator() {
             value={"+/-"}
             colorScheme={"blackAlpha"}
           />
-          <RButton
-            action={porcentagem}
-            value={"%"}
-            colorScheme={"blackAlpha"}
-          />
+          <RButton action={percentage} value={"%"} colorScheme={"blackAlpha"} />
           <RButton
             action={operatorHandler}
             value={"/"}
